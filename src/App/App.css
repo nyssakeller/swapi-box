@@ -1,15 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
+header {
+  background-image: url('../images/logo.png');
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
   padding: 20px;
   color: white;
 }
@@ -22,7 +22,9 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App h1 {
+  color: #fbde33;
+  font-family: Orbitron;
+  font-size: 40px;
+  margin-top: 150px;
 }

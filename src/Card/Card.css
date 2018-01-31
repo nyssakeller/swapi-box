@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+article {
+  background-color: rgba(32, 32, 32, 0.7);
+  display: inline-block;
+  height: 350px;
+  margin: 20px;
+  width: 300px;
+}
+
+.card p {
+  color: white;
+  font-size: 18px;
+}
+
+.card h2 {
+  color: #fbde33;
+  font-family: Orbitron;
+  font-size: 30px;
+}
+
+.favorite-button {
+  bottom: 25px;
+  height: 35px;
+  position: relative;
+  left: 125px;
+  margin-bottom: 0;
+  width: 35px;
+}

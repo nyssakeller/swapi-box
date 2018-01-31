@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+button {
+  border-radius: 10px;
+  background-color: #FFA1A1;
+  border-color: #FFA1A1;
+  box-shadow: 0px 0px 50px #FD0101;
+  color: white;
+  font-family: Orbitron;
+  font-size: 15px;
+  height: 40px;
+  margin: 30px 20px;
+  width: 120px;
+}
+
+button:hover {
+  background-color: #9AEAFF;
+  border-color: #9AEAFF;
+  box-shadow: 0px 0px 50px #013EFE;
+
+}
