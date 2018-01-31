@@ -52,16 +52,14 @@
 
   const getVehicleDetails = (vehicleArray) => {
     const pendingPromises = vehicleArray.map(async (vehicle) => {
-      const { name, model, , residents } = planet
-      console.log(vehicle)
-
-      
-      // return {
-      //   name: planet.name,
-      //   description: planet.climate,
-      //   type: planet.terrain,
-      //   number: planet.population
-      // }
+      const { name, model, vehicle_class, passengers } = vehicle;
+     
+      return {
+        name: vehicle.name,
+        description: vehicle.vehicle_class,
+        type: vehicle.model,
+        number: vehicle.passengers
+      }
     })
     return Promise.all(pendingPromises)
   }

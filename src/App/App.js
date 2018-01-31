@@ -50,10 +50,9 @@ class App extends Component {
       data = await getPeopleData()
     } else if(this.state.buttonClass === 'planets') {
       data = await getPlanetData()
-    } 
-    //else {
-    //   const data = getVehicleData()
-    // }
+    } else if(this.state.buttonClass === 'vehicles') {
+      data = getVehicleData()
+    }
 
     this.setState({data}, () => {
       console.log(this.state.data)
@@ -75,10 +74,7 @@ class App extends Component {
         
         </header>
         <Controls getButtonClass={this.getButtonClass}/>
-        {
-          !this.state.data.length &&
-          <h1>Category Select You Will</h1>
-        }
+  
         {
           this.state.data.length &&
           <CardContainer data={this.state.data}/>

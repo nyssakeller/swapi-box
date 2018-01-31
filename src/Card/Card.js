@@ -4,6 +4,7 @@ import './Card.css'
 const Card = ({name, description, type, number}) => {
   return (
     <article>
+      <button className='favorite-button'><img src="../images/redSaber.ico" /></button>
       <h2>{name}</h2>
       <p>{description}</p>
       <p>{type}</p>
