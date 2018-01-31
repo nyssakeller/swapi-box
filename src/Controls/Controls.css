@@ -19,3 +19,9 @@ button:hover {
   box-shadow: 0px 0px 50px #013EFE;
 
 }
+
+.active {
+  background-color: #9AEAFF;
+  border-color: #9AEAFF;
+  box-shadow: 0px 0px 50px #013EFE;
+}

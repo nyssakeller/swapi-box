@@ -17,16 +17,17 @@ class App extends Component {
     this.state = {
       buttonClass: '',
       data: [],
-      filmData: []
+      filmData: [],
+      favorites: []
     }
   }
 
 
   async componentDidMount () {
-    const filmData = await getFilmData();
-    this.setState({filmData}, () => {
-      console.log(this.state.filmData)
-    })
+    // const filmData = await getFilmData();
+    // this.setState({filmData}, () => {
+    //   console.log(this.state.filmData)
+    // })
   }
 
   async getCorrectApi() {
@@ -37,19 +38,30 @@ class App extends Component {
       data = await getPlanetData();
     } else if(this.state.buttonClass === 'vehicles') {
       data = await getVehicleData();
+    } else {
+      data = this.state.favorites
     }
 
     this.setState({data}, () => {
-      localStorage.setItem(this.state.buttonClass, this.state.data)
+      console.log('')
     })
   }
 
-  getButtonClass = (className) => {
+  getButtonClass = (className, button) => {
+    button.classList.toggle('active')
+    console.log(button)
     this.setState({buttonClass: className}, () => 
       this.getCorrectApi()
     
     ) 
 
+  }
+
+  favoriteCard = (card) => {
+    let favorites = [];
+    console.log(card)
+    card.classList.toggle('favorite')
+    console.log(favorites)
   }
 
   render() {
@@ -60,12 +72,18 @@ class App extends Component {
         </header>
         <Controls getButtonClass={this.getButtonClass}/>
 
+        {
+          this.state.filmData.length &&
+          <ScrollingText filmData={this.state.filmData} />
+        }
 
-        
   
         {
           this.state.data.length &&
-          <CardContainer data={this.state.data}/>
+          <CardContainer 
+            data={this.state.data}
+            favoriteCard={this.favoriteCard}
+          />
         }
       </div>
     );
