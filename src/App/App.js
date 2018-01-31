@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import CardContainer from '../CardContainer/CardContainer.js';
 import Controls from '../Controls/Controls.js';
+import ScrollingText from '../ScollingText/ScrollingText.js'
 import './App.css';
 import {
   getPeopleData,
   getPlanetData,
-  getVehicleData
+  getVehicleData,
+  getFilmData
 } from '../apiHelper.js';
 
 
@@ -15,47 +17,30 @@ class App extends Component {
     this.state = {
       buttonClass: '',
       data: [],
-      peopleData: []
+      filmData: []
     }
   }
 
-  // async fetchApi() {
-  //   let initial = await fetch(`https://swapi.co/api/${this.state.buttonClass}/`)
-  //   let { url } = await initial.json()
-  //   let data = await this.fetchSpecies(url)
-  //   debugger;
-  //   // response => response.json())
-  //   //   .then(data => this.setState({ data: data.results }, () => this.cleanData())) 
-  //     // .then(this.cleaner)
-  // }
 
-  // fetchSpecies() {
-
-  // }
-
-  componentDidMount () {
-    getVehicleData();
+  async componentDidMount () {
+    const filmData = await getFilmData();
+    this.setState({filmData}, () => {
+      console.log(this.state.filmData)
+    })
   }
-
-  // cleanData () {
-  //     this.state.data.map(person => {
-  //       fetch(person.species)
-  //         .then(data => this.setState({peopleData}))
-  //     })
-  // }
 
   async getCorrectApi() {
     let data;
     if(this.state.buttonClass === 'people') {
-      data = await getPeopleData()
+      data = await getPeopleData();
     } else if(this.state.buttonClass === 'planets') {
-      data = await getPlanetData()
+      data = await getPlanetData();
     } else if(this.state.buttonClass === 'vehicles') {
-      data = getVehicleData()
+      data = await getVehicleData();
     }
 
     this.setState({data}, () => {
-      console.log(this.state.data)
+      localStorage.setItem(this.state.buttonClass, this.state.data)
     })
   }
 
@@ -74,6 +59,9 @@ class App extends Component {
         
         </header>
         <Controls getButtonClass={this.getButtonClass}/>
+
+
+        
   
         {
           this.state.data.length &&

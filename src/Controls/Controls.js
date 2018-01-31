@@ -7,6 +7,7 @@ const Controls = ({getButtonClass}) => {
       <button className='people' onClick={(e) => getButtonClass(e.target.className)}>people</button>
       <button className='planets' onClick={(e) => getButtonClass(e.target.className)}>planets</button>
       <button className='vehicles' onClick={(e) => getButtonClass(e.target.className)}>vehicles</button>
+      <button className='favorite'>favorites</button>
     </div>
   )
 }

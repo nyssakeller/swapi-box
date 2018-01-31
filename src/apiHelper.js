@@ -33,8 +33,6 @@
     const pendingPromises = planetArray.map(async (planet) => {
       const { name, terrain, climate, population, residents } = planet
       
-      // let residentsData = await fetchJson(residents)
-      
       return {
         name: planet.name,
         description: planet.climate,
@@ -59,6 +57,24 @@
         description: vehicle.vehicle_class,
         type: vehicle.model,
         number: vehicle.passengers
+      }
+    })
+    return Promise.all(pendingPromises)
+  }
+
+  export const getFilmData = async() => {
+    const filmData = await fetchJson(`https://swapi.co/api/films/`);
+    return getFilmDetails(filmData.results) 
+  }
+
+  const getFilmDetails = (filmArray) => {
+    const pendingPromises = filmArray.map(async (film) => {
+      const { opening_crawl, title, release_date } = film;
+     
+      return {
+        description: film.opening_crawl,
+        title: film.title,
+        date: release_date.film
       }
     })
     return Promise.all(pendingPromises)

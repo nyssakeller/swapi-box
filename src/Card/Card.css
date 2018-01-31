@@ -8,11 +8,12 @@ article {
   width: 300px;
 }
 
-p {
+.card p {
   color: white;
   font-size: 18px;
 }
-h2 {
+
+.card h2 {
   color: #fbde33;
   font-family: Orbitron;
   font-size: 30px;
