@@ -18,7 +18,8 @@ class App extends Component {
       buttonClass: '',
       data: [],
       filmData: [],
-      favorites: []
+      favorites: [],
+      active: ''
     }
   }
 
@@ -48,8 +49,7 @@ class App extends Component {
   }
 
   getButtonClass = (className, button) => {
-    button.classList.toggle('active')
-    console.log(button)
+    this.setState({active: className}, () => button.classList.toggle('active'))
     this.setState({buttonClass: className}, () => 
       this.getCorrectApi()
     
@@ -57,10 +57,10 @@ class App extends Component {
 
   }
 
-  favoriteCard = (card) => {
+  favoriteCard = (card, id) => {
     let favorites = [];
-    console.log(card)
     card.classList.toggle('favorite')
+    
     console.log(favorites)
   }
 

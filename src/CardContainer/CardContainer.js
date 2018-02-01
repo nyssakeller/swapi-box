@@ -4,6 +4,7 @@ import './CardContainer.css';
 
 
 const CardContainer = ({data, favoriteCard}) => {
+  console.log(data)
   let renderedCards = data.map((set, key) => 
     <Card name={set.name}
           description={set.description}
