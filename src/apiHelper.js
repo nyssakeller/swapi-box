@@ -10,7 +10,7 @@
 
   const getPeopleDetails = (peopleArray) => {
     const pendingPromises = peopleArray.map(async (person) => {
-      const { name, homeworld, species } = person
+      const { name, homeworld, species, population } = person
       let speciesData = await fetchJson(species);
       let homeworldData = await fetchJson(homeworld)
       
@@ -32,7 +32,7 @@
   const getPlanetDetails = (planetArray) => {
     const pendingPromises = planetArray.map(async (planet) => {
       const { name, terrain, climate, population, residents } = planet
-      
+
       return {
         name: planet.name,
         description: planet.climate,

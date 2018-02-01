@@ -15,58 +15,82 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      buttonClass: '',
-      data: [],
-      filmData: []
+      buttonClass: null,
+      people: [],
+      planets: [],
+      vehicles: [],
+      filmData: [],
+      favorites: [],
+      active: ''
     }
   }
 
 
   async componentDidMount () {
-    const filmData = await getFilmData();
-    this.setState({filmData}, () => {
-      console.log(this.state.filmData)
-    })
+    // const filmData = await getFilmData();
+    // this.setState({filmData}, () => {
+    //   console.log(this.state.filmData)
+    // })
   }
+  getFromLocalStorage = () => {
+      let category = this.state.buttonClass
+      let data = localStorage.getItem(this.state.buttonClass)
+      
+      data = [... JSON.parse(data)]
+      this.setState({ [category]: data })
+  } 
 
   async getCorrectApi() {
     let data;
-    if(this.state.buttonClass === 'people') {
+    let category = this.state.buttonClass;
+    
+    if (category === 'people') {
       data = await getPeopleData();
-    } else if(this.state.buttonClass === 'planets') {
+    } else if(category === 'planets') {
       data = await getPlanetData();
-    } else if(this.state.buttonClass === 'vehicles') {
+    } else if(category === 'vehicles') {
       data = await getVehicleData();
+    } else {
+      data = this.state.favorites
     }
 
-    this.setState({data}, () => {
-      localStorage.setItem(this.state.buttonClass, this.state.data)
+    this.setState({[category]: data}, () => {
+      localStorage.setItem([category], JSON.stringify(data))
+    });
+  }
+
+  getButtonClass = (className, button) => {
+    this.setState({buttonClass: className}, () => {
+      !localStorage[this.state.buttonClass] ? 
+        this.getCorrectApi() : this.getFromLocalStorage()
+    }) 
+  }
+
+  favoriteCard = (card, id) => {
+    let category = this.state[this.state.buttonClass];
+    const match = category.find( card => card.name === id )
+    const favorites = [...this.state.favorites, match]
+    
+    this.setState({favorites}, () => {
+      card.classList.toggle('favorite')
     })
   }
 
-  getButtonClass = (className) => {
-    this.setState({buttonClass: className}, () => 
-      this.getCorrectApi()
-    
-    ) 
-
-  }
-
   render() {
+    let category = this.state.buttonClass;
+
     return (
       <div className="App">
-        <header>
-        
-        </header>
+        <header></header>
         <Controls getButtonClass={this.getButtonClass}/>
 
-
-        
-  
         {
-          this.state.data.length &&
-          <CardContainer data={this.state.data}/>
+          this.state.buttonClass &&
+          <CardContainer 
+            data={this.state[category]}
+            favoriteCard={this.favoriteCard} />
         }
+
       </div>
     );
   }
