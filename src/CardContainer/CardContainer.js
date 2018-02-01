@@ -4,12 +4,12 @@ import './CardContainer.css';
 
 
 const CardContainer = ({data, favoriteCard}) => {
-  console.log(data)
+  // debugger;
   let renderedCards = data.map((set, key) => 
     <Card name={set.name}
           description={set.description}
           type={set.type}
-          numer={set.number}
+          number={set.number}
           favoriteCard={favoriteCard}
           id={set.name}
           key={key} />

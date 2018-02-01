@@ -7,6 +7,7 @@ const Card = ({name, description, type, number, favoriteCard, id}) => {
       <button 
         className='favorite-button'
         onClick={(e) => favoriteCard(e.target.parentElement, id)}>
+        
       </button>
       <h2>{name}</h2>
       <p>{description}</p>
