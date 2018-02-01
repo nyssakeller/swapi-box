@@ -4,7 +4,12 @@ exports[`Card match snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Card />,
+  Symbol(enzyme.__unrendered__): <Card
+    description="Tatoonie"
+    name="Luke"
+    number="9320304"
+    type="human"
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -22,10 +27,18 @@ ShallowWrapper {
           className="favorite-button"
           onClick={[Function]}
 />,
-        <h2 />,
-        <p />,
-        <p />,
-        <p />,
+        <h2>
+          Luke
+</h2>,
+        <p>
+          Tatoonie
+</p>,
+        <p>
+          human
+</p>,
+        <p>
+          9320304
+</p>,
       ],
       "className": "card",
     },
@@ -48,10 +61,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": undefined,
+          "children": "Luke",
         },
         "ref": null,
-        "rendered": null,
+        "rendered": "Luke",
         "type": "h2",
       },
       Object {
@@ -59,10 +72,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": undefined,
+          "children": "Tatoonie",
         },
         "ref": null,
-        "rendered": null,
+        "rendered": "Tatoonie",
         "type": "p",
       },
       Object {
@@ -70,10 +83,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": undefined,
+          "children": "human",
         },
         "ref": null,
-        "rendered": null,
+        "rendered": "human",
         "type": "p",
       },
       Object {
@@ -81,10 +94,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": undefined,
+          "children": "9320304",
         },
         "ref": null,
-        "rendered": null,
+        "rendered": "9320304",
         "type": "p",
       },
     ],
@@ -101,10 +114,18 @@ ShallowWrapper {
             className="favorite-button"
             onClick={[Function]}
 />,
-          <h2 />,
-          <p />,
-          <p />,
-          <p />,
+          <h2>
+            Luke
+</h2>,
+          <p>
+            Tatoonie
+</p>,
+          <p>
+            human
+</p>,
+          <p>
+            9320304
+</p>,
         ],
         "className": "card",
       },
@@ -127,10 +148,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": undefined,
+            "children": "Luke",
           },
           "ref": null,
-          "rendered": null,
+          "rendered": "Luke",
           "type": "h2",
         },
         Object {
@@ -138,10 +159,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": undefined,
+            "children": "Tatoonie",
           },
           "ref": null,
-          "rendered": null,
+          "rendered": "Tatoonie",
           "type": "p",
         },
         Object {
@@ -149,10 +170,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": undefined,
+            "children": "human",
           },
           "ref": null,
-          "rendered": null,
+          "rendered": "human",
           "type": "p",
         },
         Object {
@@ -160,10 +181,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": undefined,
+            "children": "9320304",
           },
           "ref": null,
-          "rendered": null,
+          "rendered": "9320304",
           "type": "p",
         },
       ],
