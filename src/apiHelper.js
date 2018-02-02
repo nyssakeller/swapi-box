@@ -31,20 +31,26 @@
 
   const getPlanetDetails = (planetArray) => {
     const pendingPromises = planetArray.map(async (planet) => {
-      const { name, terrain, climate, population,residents } = planet
-      
-      let residentData = residents.map(async (resident) => {
-        let data = await fetchJson(resident)
-      })
+      const { name, terrain, climate, population, residents } = planet
+      const residentNames = await getPlanetResidents(residents);
 
       return {
         name: planet.name,
         description: 'Climate: ' + planet.climate,
         type: 'Terrain: ' + planet.terrain,
-        number: 'Population: ' + planet.population
+        number: 'Population: ' + planet.population,
+        residents: 'residents: ' + residentNames.join(', ')
       }
     })
-    return Promise.all(pendingPromises)
+    return Promise.all(pendingPromises);
+  }
+
+  const getPlanetResidents = (residents) => {
+    const pendingPromises = residents.map(async (resident) => {
+      const residentData = await fetchJson(resident);
+      return residentData.name;
+    })
+    return Promise.all(pendingPromises);
   }
 
   export const getVehicleData = async() => {

@@ -2,7 +2,7 @@ import React from 'react';
 import Controls from '../Controls/Controls.js';
 import './Card.css';
 
-const Card = ({name, description, type, number, favoriteCard, id}) => {
+const Card = ({name, description, type, number, favoriteCard, id, residents}) => {
 
   return (
     <article className='card'>
@@ -15,6 +15,7 @@ const Card = ({name, description, type, number, favoriteCard, id}) => {
       <p>{description}</p>
       <p>{type}</p>
       <p>{number}</p>
+      <p>{residents}</p>
     </article>
   )
 }

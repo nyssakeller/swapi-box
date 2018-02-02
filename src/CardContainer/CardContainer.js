@@ -9,6 +9,7 @@ const CardContainer = ({data, favoriteCard, className}) => {
           description={set.description}
           type={set.type}
           number={set.number}
+          residents={set.residents}
           favoriteCard={favoriteCard}
           id={set.name}
           key={key} />

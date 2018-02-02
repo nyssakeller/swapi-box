@@ -77,6 +77,7 @@ class App extends Component {
     
     this.setState({favorites}, () => {
       card.classList.toggle('favorite')
+      localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
     })
   }
 
