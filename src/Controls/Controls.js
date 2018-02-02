@@ -1,5 +1,6 @@
 import React from 'react';
 import './Controls.css';
+import PropTypes from 'prop-types';
 
 const Controls = ({getButtonClass, favorites}) => {
   return (
@@ -28,7 +29,12 @@ const Controls = ({getButtonClass, favorites}) => {
           favorites: {favorites.length}
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default Controls;
+
+Controls.propTypes = {
+  getButtonClass: PropTypes.func.isRequired,
+  favorites: PropTypes.array.isRequired
+};

@@ -1,11 +1,5 @@
 import {
-  fetchJson,
-  getFilmData,
-  getPeopleData,
-  getPlanetsData,
-  getVehicleData,
-  fetchPlanetResidents,
-  getVehcileDetails
+  fetchJson
 } from './apiHelper.js';
 
 describe('fetchJson', () => {
@@ -16,24 +10,24 @@ describe('fetchJson', () => {
     redirected: true, 
     status: 200, 
     ok: true
-  }
+  };
 
   beforeAll(() => {
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       json: () => Promise.resolve(
         url
       )
-  }));
-})
+    }));
+  });
 
   it('called with correct params', async() => {
-    const expectedParams = `https://swapi.co/api/vehicles/`
-    await window.fetch
-    await fetchJson(url)
-    expect(window.fetch).toBeCalledWith(expectedParams)
-  })
+    const expectedParams = `https://swapi.co/api/vehicles/`;
+    await window.fetch;
+    await fetchJson(url);
+    expect(window.fetch).toBeCalledWith(expectedParams);
+  });
 
-})
+});
 
 // describe('getVehicleData', () => {
 //   const mockVehicleData = [

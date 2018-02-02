@@ -6,8 +6,8 @@ import App from './App';
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<App />)
-})
+  wrapper = shallow(<App />);
+});
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -22,11 +22,11 @@ describe('App', () => {
     expect(wrapper.state('planets')).toEqual([]);
     expect(wrapper.state('filmData')).toEqual([]);
     expect(wrapper.state('favorites')).toEqual([]);
-  })
+  });
 
   it('initial state of buttonClass and active equal to empty string', () => {
     expect(wrapper.state('buttonClass')).toEqual(null);
-  })
+  });
 
   // it('update state of buttonClass', () => {
   //   wrapper.instance().getButtonClass();
