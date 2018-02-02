@@ -7,7 +7,9 @@ import {
   getPeopleData,
   getPlanetData,
   getVehicleData,
-  getFilmData
+  getFilmData,
+  fetchApi,
+  fetchJson
 } from '../apiHelper.js';
 
 
@@ -27,7 +29,7 @@ class App extends Component {
 
 
   async componentDidMount () {
-    const filmData = await getFilmData();
+    const filmData = await fetchApi('films');
     this.setState({filmData}, () => {
       console.log(this.state.filmData)
     })
@@ -47,14 +49,10 @@ class App extends Component {
     let data;
     const category = this.state.buttonClass;
     
-    if (category === 'people') {
-      data = await getPeopleData();
-    } else if(category === 'planets') {
-      data = await getPlanetData();
-    } else if(category === 'vehicles') {
-      data = await getVehicleData();
-    } else {
+    if (category === 'favorites') {
       data = this.state.favorites
+    } else {
+      data = await fetchApi(category);
     }
 
     this.setState({[category]: data}, () => {
@@ -91,10 +89,7 @@ class App extends Component {
           getButtonClass={this.getButtonClass}
           favorites={this.state.favorites} />
 
-        {
-          this.state.filmData.length && !category  && 
-          <ScrollingText filmData={this.state.filmData} />
-        }
+     
 
         {
           this.state.buttonClass &&
