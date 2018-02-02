@@ -4,11 +4,10 @@ import Controls from '../Controls/Controls.js';
 import ScrollingText from '../ScollingText/ScrollingText.js'
 import './App.css';
 import {
-  getPeopleData,
-  getPlanetData,
-  getVehicleData,
+  getPeopleDetails,
+  getPlanetDetails,
+  getVehicleDetails,
   getFilmData,
-  fetchApi,
   fetchJson
 } from '../apiHelper.js';
 
@@ -17,7 +16,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      buttonClass: null,
+      category: null,
       people: [],
       planets: [],
       vehicles: [],
@@ -29,16 +28,15 @@ class App extends Component {
 
 
   async componentDidMount () {
-    const filmData = await fetchApi('films');
-    this.setState({filmData}, () => {
-      console.log(this.state.filmData)
-    })
-    console.log(this.state.filmData)
+    // const filmData = await fetchJson('films');
+    // this.setState({filmData}, () => {
+    //   console.log(this.state.filmData)
+    // })
   }
 
-  getButtonClass = (className, button) => {
-    this.setState({buttonClass: className}, () => {
-      const category = this.state.buttonClass
+  getButtonClass = (category, button) => {
+    this.setState({category}, () => {
+      const {category} = this.state
       
       !localStorage[category] ? 
         this.getCorrectApi() : this.getFromLocalStorage()
@@ -47,12 +45,16 @@ class App extends Component {
 
   async getCorrectApi() {
     let data;
-    const category = this.state.buttonClass;
+    const {category} = this.state;
     
-    if (category === 'favorites') {
-      data = this.state.favorites
+    if (category === 'people') {
+      data = await getPeopleDetails(`https://swapi.co/api/people`)
+    } else if (category === 'planets') {
+      data = await getPlanetDetails(`https://swapi.co/api/planets`)
+    } else if (category === 'vehicles') {
+      data = await getVehicleDetails(`https://swapi.co/api/vehicles`)
     } else {
-      data = await fetchApi(category);
+      data = this.state.favorites;
     }
 
     this.setState({[category]: data}, () => {
@@ -61,7 +63,7 @@ class App extends Component {
   }
   
   getFromLocalStorage = () => {
-      const category = this.state.buttonClass
+      const {category} = this.state
       let data = localStorage.getItem(category)
       
       data = [... JSON.parse(data)]
@@ -69,7 +71,7 @@ class App extends Component {
   } 
 
   favoriteCard = (card, id) => {
-    const category = this.state[this.state.buttonClass];
+    const category = this.state[this.state.category];
     const match = category.find( card => card.name === id )
     const favorites = [...this.state.favorites, match]
     
@@ -80,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    const category = this.state.buttonClass;
+    const {category} = this.state;
 
     return (
       <div className="App">
@@ -92,7 +94,7 @@ class App extends Component {
      
 
         {
-          this.state.buttonClass &&
+          category &&
           <CardContainer 
             data={this.state[category]}
             favoriteCard={this.favoriteCard} />

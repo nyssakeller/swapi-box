@@ -1,29 +1,17 @@
 export const fetchJson = async(apiUrl) => {
-    const initialFetch = await fetch(apiUrl)
-    return await initialFetch.json();
+    const initialFetch = await fetch(apiUrl);
+    console.log(initialFetch)
+    const data = await initialFetch.json();
+    return data;
 }
 
-export const fetchApi = async(category) => {
-    const data = await fetchJson(`https://swapi.co/api/${category}`)
-    
-    if (category === 'people') {
-      return getPeopleDetails(data.results);
-    } else if (category === 'planets') {
-      return getPlanetDetails(data.results);
-    } else if (category === 'vehicles') {
-      return getVehicleDetails(data.results)
-    } else if(category === 'films') {
-      return getFilmDetails(data.results)
-    }
-
-  }
-
-  const getPeopleDetails = (peopleArray) => {
-    console.log(peopleArray)
-    const pendingPromises = peopleArray.map(async (person) => {
-      const { name, homeworld, species, population } = person
-      let speciesData = await fetchJson(species);
-      let homeworldData = await fetchJson(homeworld)
+export  const getPeopleDetails = async(category) => {
+    const {results} = await fetchJson(category);
+  
+    const pendingPromises = results.map(async (person) => {
+      const { name, homeworld, species, population } = person;
+      const speciesData = await fetchJson(species);
+      const homeworldData = await fetchJson(homeworld);
       
       return {
         name: person.name,
@@ -32,12 +20,14 @@ export const fetchApi = async(category) => {
         number: 'Homeworld Population: ' + homeworldData.population
       }
     })
-    return Promise.all(pendingPromises)
+    return Promise.all(pendingPromises);
   }
 
-  const getPlanetDetails = (planetArray) => {
-    const pendingPromises = planetArray.map(async (planet) => {
-      const { name, terrain, climate, population, residents } = planet
+export  const getPlanetDetails = async(category) => {
+    const {results} = await fetchJson(category);
+
+    const pendingPromises = results.map(async (planet) => {
+      const { name, terrain, climate, population, residents } = planet;
       const residentNames = await getPlanetResidents(residents);
 
       return {
@@ -59,8 +49,10 @@ export const fetchApi = async(category) => {
     return Promise.all(pendingPromises);
   }
 
-  const getVehicleDetails = (vehicleArray) => {
-    const pendingPromises = vehicleArray.map(async (vehicle) => {
+export const getVehicleDetails = async(category) => {
+    const {results} = await fetchJson(category);
+
+    const pendingPromises = results.map(async (vehicle) => {
       const { name, model, vehicle_class, passengers } = vehicle;
      
       return {
@@ -83,7 +75,7 @@ export const fetchApi = async(category) => {
         date: release_date.film
       }
     })
-    return Promise.all(pendingPromises)
+    return Promise.all(pendingPromises);
   }
 
 
@@ -127,3 +119,18 @@ export const fetchApi = async(category) => {
 //     // number: data.populationOfHomeworld
 //   }
 // }
+
+// export const fetchApi = async(category) => {
+//     const data = await fetchJson(`https://swapi.co/api/${category}`)
+//     return data.results
+    // if (category === 'people') {
+    //   return getPeopleDetails(data.results);
+    // } else if (category === 'planets') {
+    //   return getPlanetDetails(data.results);
+    // } else if (category === 'vehicles') {
+    //   return getVehicleDetails(data.results)
+    // } else if(category === 'films') {
+    //   return getFilmDetails(data.results)
+    // }
+
+  // }
