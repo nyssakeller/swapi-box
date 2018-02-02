@@ -16,9 +16,9 @@
       
       return {
         name: person.name,
-        description: homeworldData.name,
-        type: speciesData.name,
-        number: homeworldData.population
+        description: 'Homeworld: ' + homeworldData.name,
+        type: 'Species: ' + speciesData.name,
+        number: 'Homeworld Population: ' + homeworldData.population
       }
     })
     return Promise.all(pendingPromises)
@@ -31,13 +31,17 @@
 
   const getPlanetDetails = (planetArray) => {
     const pendingPromises = planetArray.map(async (planet) => {
-      const { name, terrain, climate, population, residents } = planet
+      const { name, terrain, climate, population,residents } = planet
+      
+      let residentData = residents.map(async (resident) => {
+        let data = await fetchJson(resident)
+      })
 
       return {
         name: planet.name,
-        description: planet.climate,
-        type: planet.terrain,
-        number: planet.population
+        description: 'Climate: ' + planet.climate,
+        type: 'Terrain: ' + planet.terrain,
+        number: 'Population: ' + planet.population
       }
     })
     return Promise.all(pendingPromises)
@@ -54,9 +58,9 @@
      
       return {
         name: vehicle.name,
-        description: vehicle.vehicle_class,
-        type: vehicle.model,
-        number: vehicle.passengers
+        description: 'Class: ' + vehicle.vehicle_class,
+        type: 'Model: ' + vehicle.model,
+        number: 'Number of Passengers: ' + vehicle.passengers
       }
     })
     return Promise.all(pendingPromises)

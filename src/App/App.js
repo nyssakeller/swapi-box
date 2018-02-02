@@ -27,22 +27,25 @@ class App extends Component {
 
 
   async componentDidMount () {
-    // const filmData = await getFilmData();
-    // this.setState({filmData}, () => {
-    //   console.log(this.state.filmData)
-    // })
+    const filmData = await getFilmData();
+    this.setState({filmData}, () => {
+      console.log(this.state.filmData)
+    })
+    console.log(this.state.filmData)
   }
-  getFromLocalStorage = () => {
-      let category = this.state.buttonClass
-      let data = localStorage.getItem(this.state.buttonClass)
+
+  getButtonClass = (className, button) => {
+    this.setState({buttonClass: className}, () => {
+      const category = this.state.buttonClass
       
-      data = [... JSON.parse(data)]
-      this.setState({ [category]: data })
-  } 
+      !localStorage[category] ? 
+        this.getCorrectApi() : this.getFromLocalStorage()
+    }) 
+  }
 
   async getCorrectApi() {
     let data;
-    let category = this.state.buttonClass;
+    const category = this.state.buttonClass;
     
     if (category === 'people') {
       data = await getPeopleData();
@@ -58,16 +61,17 @@ class App extends Component {
       localStorage.setItem([category], JSON.stringify(data))
     });
   }
-
-  getButtonClass = (className, button) => {
-    this.setState({buttonClass: className}, () => {
-      !localStorage[this.state.buttonClass] ? 
-        this.getCorrectApi() : this.getFromLocalStorage()
-    }) 
-  }
+  
+  getFromLocalStorage = () => {
+      const category = this.state.buttonClass
+      let data = localStorage.getItem(category)
+      
+      data = [... JSON.parse(data)]
+      this.setState({ [category]: data })
+  } 
 
   favoriteCard = (card, id) => {
-    let category = this.state[this.state.buttonClass];
+    const category = this.state[this.state.buttonClass];
     const match = category.find( card => card.name === id )
     const favorites = [...this.state.favorites, match]
     
@@ -77,12 +81,19 @@ class App extends Component {
   }
 
   render() {
-    let category = this.state.buttonClass;
+    const category = this.state.buttonClass;
 
     return (
       <div className="App">
         <header></header>
-        <Controls getButtonClass={this.getButtonClass}/>
+        <Controls 
+          getButtonClass={this.getButtonClass}
+          favorites={this.state.favorites} />
+
+        {
+          this.state.filmData.length && !category  && 
+          <ScrollingText filmData={this.state.filmData} />
+        }
 
         {
           this.state.buttonClass &&

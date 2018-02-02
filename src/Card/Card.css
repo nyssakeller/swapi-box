@@ -6,6 +6,7 @@ article {
   height: 350px;
   margin: 20px;
   width: 300px;
+  vertical-align: top;
 }
 
 .card p {

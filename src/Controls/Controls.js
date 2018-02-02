@@ -1,7 +1,7 @@
 import React from 'react';
 import './Controls.css';
 
-const Controls = ({getButtonClass}) => {
+const Controls = ({getButtonClass, favorites}) => {
   return (
     <div>
       <button 
@@ -25,7 +25,7 @@ const Controls = ({getButtonClass}) => {
       <button 
         className='favorites' 
         onClick={(e) => getButtonClass(e.target.className, e.target)}>
-          favorites
+          favorites: {favorites.length}
       </button>
     </div>
   )
