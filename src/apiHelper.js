@@ -1,14 +1,25 @@
-  const fetchJson = async(apiUrl) => {
+export const fetchJson = async(apiUrl) => {
     const initialFetch = await fetch(apiUrl)
-    return initialFetch.json();
-  }
+    return await initialFetch.json();
+}
 
-  export const getPeopleData = async() => {
-    const peopleData = await fetchJson(`https://swapi.co/api/people/`);
-    return getPeopleDetails(peopleData.results);
+export const fetchApi = async(category) => {
+    const data = await fetchJson(`https://swapi.co/api/${category}`)
+    
+    if (category === 'people') {
+      return getPeopleDetails(data.results);
+    } else if (category === 'planets') {
+      return getPlanetDetails(data.results);
+    } else if (category === 'vehicles') {
+      return getVehicleDetails(data.results)
+    } else if(category === 'films') {
+      return getFilmDetails(data.results)
+    }
+
   }
 
   const getPeopleDetails = (peopleArray) => {
+    console.log(peopleArray)
     const pendingPromises = peopleArray.map(async (person) => {
       const { name, homeworld, species, population } = person
       let speciesData = await fetchJson(species);
@@ -22,11 +33,6 @@
       }
     })
     return Promise.all(pendingPromises)
-  }
-
-  export const getPlanetData = async() => {
-    const planetData = await fetchJson(`https://swapi.co/api/planets/`);
-    return getPlanetDetails(planetData.results) 
   }
 
   const getPlanetDetails = (planetArray) => {
@@ -53,11 +59,6 @@
     return Promise.all(pendingPromises);
   }
 
-  export const getVehicleData = async() => {
-    const vehicleData = await fetchJson(`https://swapi.co/api/vehicles/`);
-    return getVehicleDetails(vehicleData.results) 
-  }
-
   const getVehicleDetails = (vehicleArray) => {
     const pendingPromises = vehicleArray.map(async (vehicle) => {
       const { name, model, vehicle_class, passengers } = vehicle;
@@ -72,11 +73,6 @@
     return Promise.all(pendingPromises)
   }
 
-  export const getFilmData = async() => {
-    const filmData = await fetchJson(`https://swapi.co/api/films/`);
-    return getFilmDetails(filmData.results) 
-  }
-
   const getFilmDetails = (filmArray) => {
     const pendingPromises = filmArray.map(async (film) => {
       const { opening_crawl, title, release_date } = film;
@@ -89,12 +85,6 @@
     })
     return Promise.all(pendingPromises)
   }
-  // fetchBios(arrayOfBios) {
-  //   const unresolvedPromises = arrayOfBios.map(async (staffMember) => {
-  //     let initialFetch = await fetch(staffMember.info)
-  //     let bio = await initialFetch.json()
-  //     return {...staffMember, ...bio}
-  //   })
 
 
 
