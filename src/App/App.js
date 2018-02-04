@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CardContainer from '../CardContainer/CardContainer.js';
 import Controls from '../Controls/Controls.js';
-import ScrollingText from '../ScollingText/ScrollingText.js';
+import ScrollingText from '../ScollingText/ScrollingText.js';s
 import './App.css';
 import {
   getPeopleDetails,
@@ -25,10 +25,12 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    // const filmData = await getFilmDetails(`https://swapi.co/api/films`);
-    // this.setState({filmData}, () => {
-    //   console.log(this.state.filmData);
-    // });
+    try {
+      const filmData = await getFilmDetails(`https://swapi.co/api/films`);
+      this.setState({filmData});
+    } catch (error) {
+      throw new Error('error')
+    }
   }
 
   getButtonClass = (category) => {
@@ -68,7 +70,10 @@ class App extends Component {
   } 
 
   favoriteCard = (dataObj) => {
-    const favorites = [...this.state.favorites, dataObj];
+    const {category} = this.state;
+    const favoritedCard = this.state[category].find(card => card === dataObj)
+    const favorites = [...this.state.favorites, favoritedCard];
+
     dataObj.favoriteStatus = !dataObj.favoriteStatus;
 
     this.setState({favorites}, () => {

@@ -4,7 +4,6 @@ import './CardContainer.css';
 import PropTypes from 'prop-types';
 
 const CardContainer = ({data, favoriteCard}) => {
-  console.log(data)
   let renderedCards = data.map((dataObject, key) => 
     <Card 
       {...dataObject}

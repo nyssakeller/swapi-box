@@ -21,6 +21,7 @@ article {
 }
 
 .favorite-button {
+  background-image: url('../images/star.png');
   bottom: 25px;
   height: 35px;
   position: relative;

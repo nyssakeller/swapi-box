@@ -5,22 +5,27 @@ export const fetchJson = async(apiUrl) => {
 }
 
 export const getPeopleDetails = async(category) => {
-  const {results} = await fetchJson(category);
+  try { 
+    const {results} = await fetchJson(category);
 
-  const pendingPromises = results.map(async (person) => {
-    const { name, homeworld, species, population } = person;
-    const speciesData = await fetchJson(species);
-    const homeworldData = await fetchJson(homeworld);
-    
-    return {
-      name: person.name,
-      description: 'Homeworld: ' + homeworldData.name,
-      type: 'Species: ' + speciesData.name,
-      number: 'Homeworld Population: ' + homeworldData.population,
-      favoriteStatus: null
-    }
-  })
-  return Promise.all(pendingPromises);
+    const pendingPromises = results.map(async (person) => {
+      const { name, homeworld, species, population } = person;
+      const speciesData = await fetchJson(species);
+      const homeworldData = await fetchJson(homeworld);
+      
+      return {
+        name: person.name,
+        description: 'Homeworld: ' + homeworldData.name,
+        type: 'Species: ' + speciesData.name,
+        number: 'Homeworld Population: ' + homeworldData.population,
+        favoriteStatus: null
+      }
+    })
+    return Promise.all(pendingPromises);
+  } catch(error) {
+    throw new Error('error')
+  }
+
 }
 
 export const getPlanetDetails = async(category) => {
