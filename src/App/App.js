@@ -68,15 +68,11 @@ class App extends Component {
   } 
 
   favoriteCard = (card, dataObj) => {
-    // const category = this.state[this.state.category];
+    const favorites = [...this.state.favorites, dataObj];
 
-    // // const match = this.state.favorites.filter( card => );
-    // const favorites = [...this.state.favorites, match];
-    
-    // this.setState({favorites}, () => {
-    //   card.classList.toggle('favorite');
-    //   localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
-    // });
+    this.setState({favorites}, () => {
+      localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    });
   }
 
   render() {
