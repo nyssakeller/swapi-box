@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CardContainer from '../CardContainer/CardContainer.js';
 import Controls from '../Controls/Controls.js';
-import ScrollingText from '../ScollingText/ScrollingText.js';
+import ScrollingText from '../ScollingText/ScrollingText.js';s
 import './App.css';
 import {
   getPeopleDetails,
@@ -25,10 +25,12 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    // const filmData = await getFilmDetails(`https://swapi.co/api/films`);
-    // this.setState({filmData}, () => {
-    //   console.log(this.state.filmData);
-    // });
+    try {
+      const filmData = await getFilmDetails(`https://swapi.co/api/films`);
+      this.setState({filmData});
+    } catch (error) {
+      throw new Error('error')
+    }
   }
 
   getButtonClass = (category) => {
@@ -67,16 +69,16 @@ class App extends Component {
     this.setState({ [category]: data });
   } 
 
-  favoriteCard = (card, dataObj) => {
-    // const category = this.state[this.state.category];
+  favoriteCard = (dataObj) => {
+    const {category} = this.state;
+    const favoritedCard = this.state[category].find(card => card === dataObj)
+    const favorites = [...this.state.favorites, favoritedCard];
 
-    // // const match = this.state.favorites.filter( card => );
-    // const favorites = [...this.state.favorites, match];
-    
-    // this.setState({favorites}, () => {
-    //   card.classList.toggle('favorite');
-    //   localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
-    // });
+    dataObj.favoriteStatus = !dataObj.favoriteStatus;
+
+    this.setState({favorites}, () => {
+      localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    });
   }
 
   render() {

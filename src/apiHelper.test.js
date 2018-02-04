@@ -132,4 +132,17 @@ describe('getPeopleDetails', () => {
     expect(typeof peopleData).toEqual('object');
   })
 
+  it('should throw the error for getPeople when catch is hit in the Promise', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject({
+      status: 404
+    }))
+    const expectedError = Error('error')
+
+    try {
+      await getPeopleDetails();
+    } catch(err) {
+      expect(err).toEqual(expectedError)
+    }
+  });
+
 });
