@@ -4,7 +4,7 @@ export const fetchJson = async(apiUrl) => {
   return data;
 }
 
-export  const getPeopleDetails = async(category) => {
+export const getPeopleDetails = async(category) => {
   const {results} = await fetchJson(category);
 
   const pendingPromises = results.map(async (person) => {
@@ -20,9 +20,9 @@ export  const getPeopleDetails = async(category) => {
     }
   })
   return Promise.all(pendingPromises);
+}
 
-
-export  const getPlanetDetails = async(category) => {
+export const getPlanetDetails = async(category) => {
   const {results} = await fetchJson(category);
 
   const pendingPromises = results.map(async (planet) => {
@@ -66,8 +66,8 @@ export const getVehicleDetails = async(category) => {
 
 export const getFilmDetails = async(category) => {
   const {results} = await fetchJson(category)
-
   const pendingPromises = results.map(async (film) => {
+    console.log(film)
     const { opening_crawl, title, release_date } = film;
    
     return {

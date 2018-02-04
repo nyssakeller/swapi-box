@@ -39,6 +39,7 @@ ShallowWrapper {
         <p>
           9320304
 </p>,
+        <p />,
       ],
       "className": "card",
     },
@@ -100,6 +101,17 @@ ShallowWrapper {
         "rendered": "9320304",
         "type": "p",
       },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "p",
+      },
     ],
     "type": "article",
   },
@@ -126,6 +138,7 @@ ShallowWrapper {
           <p>
             9320304
 </p>,
+          <p />,
         ],
         "className": "card",
       },
@@ -185,6 +198,17 @@ ShallowWrapper {
           },
           "ref": null,
           "rendered": "9320304",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": undefined,
+          },
+          "ref": null,
+          "rendered": null,
           "type": "p",
         },
       ],

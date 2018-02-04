@@ -10,7 +10,6 @@ import {
   getFilmDetails
 } from '../apiHelper.js';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -25,12 +24,11 @@ class App extends Component {
     };
   }
 
-
   async componentDidMount () {
-    const filmData = await getFilmDetails(`https://swapi.co/api/films`);
-    this.setState({filmData}, () => {
-      console.log(this.state.filmData);
-    });
+    // const filmData = await getFilmDetails(`https://swapi.co/api/films`);
+    // this.setState({filmData}, () => {
+    //   console.log(this.state.filmData);
+    // });
   }
 
   getButtonClass = (category) => {
@@ -70,15 +68,15 @@ class App extends Component {
   } 
 
   favoriteCard = (card, dataObj) => {
-    const category = this.state[this.state.category];
+    // const category = this.state[this.state.category];
 
-    // const match = this.state.favorites.filter( card => );
-    const favorites = [...this.state.favorites, match];
+    // // const match = this.state.favorites.filter( card => );
+    // const favorites = [...this.state.favorites, match];
     
-    this.setState({favorites}, () => {
-      card.classList.toggle('favorite');
-      localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
-    });
+    // this.setState({favorites}, () => {
+    //   card.classList.toggle('favorite');
+    //   localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
+    // });
   }
 
   render() {

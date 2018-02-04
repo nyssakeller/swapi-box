@@ -22,11 +22,11 @@ const Card = ({name, description, type, number, favoriteCard, residents, dataObj
 export default Card;
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
-  residents: PropTypes.string.isRequired,
-  dataObj: PropTypes.object.isRequired,
-  favoriteCard: PropTypes.func.isRequired
+  name: PropTypes.string,
+  description: PropTypes.string,
+  type: PropTypes.string,
+  number: PropTypes.number,
+  residents: PropTypes.string,
+  dataObj: PropTypes.object,
+  favoriteCard: PropTypes.func
 };
