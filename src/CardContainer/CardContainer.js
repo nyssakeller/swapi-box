@@ -22,8 +22,8 @@ const CardContainer = ({data, favoriteCard}) => {
 export default CardContainer;
 
 CardContainer.propTypes = {
-  favoriteCard: PropTypes.func.isRequired,
-  dataObj: PropTypes.object.isRequired,
-  key: PropTypes.number.isRequired,
-  data: PropTypes.array.isRequired
+  favoriteCard: PropTypes.func,
+  dataObj: PropTypes.object,
+  key: PropTypes.number,
+  data: PropTypes.array
 };

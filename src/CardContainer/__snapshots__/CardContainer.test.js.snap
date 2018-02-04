@@ -36,19 +36,33 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Card
+          dataObj={
+                    Object {
+                              "description": "rav4",
+                              "name": "vehicle1",
+                              "number": 5,
+                              "type": "toyota",
+                            }
+          }
           description="rav4"
           favoriteCard={undefined}
-          id="vehicle1"
           name="vehicle1"
-          numer={5}
+          number={5}
           type="toyota"
 />,
         <Card
+          dataObj={
+                    Object {
+                              "description": "equinox",
+                              "name": "vehicle1",
+                              "number": 6,
+                              "type": "chevy",
+                            }
+          }
           description="equinox"
           favoriteCard={undefined}
-          id="vehicle1"
           name="vehicle1"
-          numer={6}
+          number={6}
           type="chevy"
 />,
       ],
@@ -61,11 +75,16 @@ ShallowWrapper {
         "key": "0",
         "nodeType": "function",
         "props": Object {
+          "dataObj": Object {
+            "description": "rav4",
+            "name": "vehicle1",
+            "number": 5,
+            "type": "toyota",
+          },
           "description": "rav4",
           "favoriteCard": undefined,
-          "id": "vehicle1",
           "name": "vehicle1",
-          "numer": 5,
+          "number": 5,
           "type": "toyota",
         },
         "ref": null,
@@ -77,11 +96,16 @@ ShallowWrapper {
         "key": "1",
         "nodeType": "function",
         "props": Object {
+          "dataObj": Object {
+            "description": "equinox",
+            "name": "vehicle1",
+            "number": 6,
+            "type": "chevy",
+          },
           "description": "equinox",
           "favoriteCard": undefined,
-          "id": "vehicle1",
           "name": "vehicle1",
-          "numer": 6,
+          "number": 6,
           "type": "chevy",
         },
         "ref": null,
@@ -99,19 +123,33 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Card
+            dataObj={
+                        Object {
+                                    "description": "rav4",
+                                    "name": "vehicle1",
+                                    "number": 5,
+                                    "type": "toyota",
+                                  }
+            }
             description="rav4"
             favoriteCard={undefined}
-            id="vehicle1"
             name="vehicle1"
-            numer={5}
+            number={5}
             type="toyota"
 />,
           <Card
+            dataObj={
+                        Object {
+                                    "description": "equinox",
+                                    "name": "vehicle1",
+                                    "number": 6,
+                                    "type": "chevy",
+                                  }
+            }
             description="equinox"
             favoriteCard={undefined}
-            id="vehicle1"
             name="vehicle1"
-            numer={6}
+            number={6}
             type="chevy"
 />,
         ],
@@ -124,11 +162,16 @@ ShallowWrapper {
           "key": "0",
           "nodeType": "function",
           "props": Object {
+            "dataObj": Object {
+              "description": "rav4",
+              "name": "vehicle1",
+              "number": 5,
+              "type": "toyota",
+            },
             "description": "rav4",
             "favoriteCard": undefined,
-            "id": "vehicle1",
             "name": "vehicle1",
-            "numer": 5,
+            "number": 5,
             "type": "toyota",
           },
           "ref": null,
@@ -140,11 +183,16 @@ ShallowWrapper {
           "key": "1",
           "nodeType": "function",
           "props": Object {
+            "dataObj": Object {
+              "description": "equinox",
+              "name": "vehicle1",
+              "number": 6,
+              "type": "chevy",
+            },
             "description": "equinox",
             "favoriteCard": undefined,
-            "id": "vehicle1",
             "name": "vehicle1",
-            "numer": 6,
+            "number": 6,
             "type": "chevy",
           },
           "ref": null,

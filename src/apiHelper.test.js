@@ -1,72 +1,135 @@
 import {
+  getFilmDetails,
+  getPlanetDetails,
+  getPeopleDetails,
+  getVehicleDetails,
   fetchJson
 } from './apiHelper.js';
 
+import {mockFilm, mockVehicle, mockPlanets, mockPeople} from './mockData.js';
 describe('fetchJson', () => {
-
-  const { url } = {
-    type: "cors", 
-    url: "https://swapi.co/api/vehicles/", 
-    redirected: true, 
-    status: 200, 
-    ok: true
-  };
 
   beforeAll(() => {
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-      json: () => Promise.resolve(
-        url
-      )
+      status: 200,
+      json: () => Promise.resolve({
+        results: 'return results',
+      })
     }));
   });
 
-  it('called with correct params', async() => {
-    const expectedParams = `https://swapi.co/api/vehicles/`;
-    await window.fetch;
-    await fetchJson(url);
-    expect(window.fetch).toBeCalledWith(expectedParams);
+  it('fetch gets called', async() => {
+    expect(window.fetch).not.toHaveBeenCalled();
+    fetchJson();
+    expect(window.fetch).toBeCalled();
+  });
+
+  it('throw an error when catch is hit', () => {
+
   });
 
 });
 
-// describe('getVehicleData', () => {
-//   const mockVehicleData = [
-//     {
-//       title: 'car',
-//       model: 'model2',
-//       vehicle_class: 'class2',
-//       numberOfPassengers: 2
-//     }, 
-//     {
-//       title: 'boat',
-//       model: 'model1',
-//       vehicle_class: 'class9',
-//       numberOfPassengers: 92
-//     }
-//   ]
-  
-//   beforeAll(() => {
+describe('getFilmDetails', () => {
 
-//   })
+  beforeAll(() => {
 
-//   it('called with correct params', () => {
-//     const expectedParams = `https://swapi.co/api/vehicles`
-//     window.fetch = jest.fn().mockImplementation(() => {
-//       return Promise.resolve({
-//         ok: true,
-//         status: 200,
-//         json: () => Promise.resolve({
-//           mockVehicleData
-//         })
-//       })
-//     })
-//     getVehicleData(mockVehicleData)
-//     expect(window.fetch).toBeCalledWith(expectedParams)
-//   })
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      status: 200,
+      json: () => Promise.resolve({
+        results: mockFilm
+      })
+    }));
+  });
 
-//   it('returns and object if the status code is ok', () => {
-//     expect(addGrocery(mockGrocery)).resolves.toEqual({mockFilmData})
-//   })
+  it('fetch gets called', async() => {
+    expect(window.fetch).not.toHaveBeenCalled();
+    await getFilmDetails();
+    expect(window.fetch).toHaveBeenCalled();
+  });
+
+  it('should return an object of results', async() => {
+    const filmData = await getFilmDetails(7);
+    expect(typeof filmData).toEqual('object');
+  })
+
+});
 
 
-// })
+describe('getVehicleDetails', () => {
+
+  beforeAll(() => {
+
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      status: 200,
+      json: () => Promise.resolve({
+        results: mockVehicle
+      })
+    }));
+  });
+
+  it('fetch gets called', async() => {
+    expect(window.fetch).not.toHaveBeenCalled();
+    await getVehicleDetails();
+    expect(window.fetch).toHaveBeenCalled();
+  });
+
+  it('should return an object of results', async() => {
+    const vehicleData = await getVehicleDetails();
+
+    expect(typeof vehicleData).toEqual('object');
+  });
+
+});
+
+describe('getPlanetDetails', () => {
+
+  beforeAll(() => {
+
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      status: 200,
+      json: () => Promise.resolve({
+        results: mockPlanets
+      })
+    }));
+  });
+
+  it('fetch gets called', async() => {
+    expect(window.fetch).not.toHaveBeenCalled();
+    await getPlanetDetails();
+    expect(window.fetch).toHaveBeenCalled();
+  });
+
+  it('should return an object of results', async() => {
+    const planetData = await getPlanetDetails();
+
+    expect(typeof planetData).toEqual('object');
+  });
+
+});
+
+describe('getPeopleDetails', () => {
+
+  beforeAll(() => {
+
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      status: 200,
+      json: () => Promise.resolve({
+        results: mockPeople
+      })
+    }));
+  });
+
+  it('fetch gets called', async() => {
+    expect(window.fetch).not.toHaveBeenCalled();
+    await getPeopleDetails();
+    expect(window.fetch).toHaveBeenCalled();
+  });
+
+  it('should return an object of results', async() => {
+    const peopleData = await getPeopleDetails();
+
+    expect(typeof peopleData).toEqual('object');
+  })
+
+});
