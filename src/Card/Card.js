@@ -2,12 +2,14 @@ import React from 'react';
 import './Card.css';
 import PropTypes from 'prop-types';
 
-const Card = ({name, description, type, number, favoriteCard, residents, dataObj}) => {
+const Card = ({name, description, type, number, favoriteStatus, favoriteCard, residents, dataObj}) => {
+  const toggleClass = favoriteStatus ? 'card favorite' : 'card';
+
   return (
-    <article className='card'>
+    <article className={toggleClass}>
       <button 
         className='favorite-button'
-        onClick={(e) => favoriteCard(e.target.parentElement, dataObj)}>
+        onClick={() => favoriteCard(dataObj)}>
       </button>
 
       <h2>{name}</h2>
@@ -25,7 +27,7 @@ Card.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   type: PropTypes.string,
-  number: PropTypes.number,
+  number: PropTypes.string,
   residents: PropTypes.string,
   dataObj: PropTypes.object,
   favoriteCard: PropTypes.func

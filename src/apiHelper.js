@@ -16,7 +16,8 @@ export const getPeopleDetails = async(category) => {
       name: person.name,
       description: 'Homeworld: ' + homeworldData.name,
       type: 'Species: ' + speciesData.name,
-      number: 'Homeworld Population: ' + homeworldData.population
+      number: 'Homeworld Population: ' + homeworldData.population,
+      favoriteStatus: null
     }
   })
   return Promise.all(pendingPromises);
@@ -34,7 +35,8 @@ export const getPlanetDetails = async(category) => {
       description: 'Climate: ' + planet.climate,
       type: 'Terrain: ' + planet.terrain,
       number: 'Population: ' + planet.population,
-      residents: 'residents: ' + residentNames.join(', ')
+      residents: 'residents: ' + residentNames.join(', '),
+      favoriteStatus: null
     }
   })
   return Promise.all(pendingPromises);
@@ -58,7 +60,8 @@ export const getVehicleDetails = async(category) => {
       name: vehicle.name,
       description: 'Class: ' + vehicle.vehicle_class,
       type: 'Model: ' + vehicle.model,
-      number: 'Number of Passengers: ' + vehicle.passengers
+      number: 'Number of Passengers: ' + vehicle.passengers,
+      favoriteStatus: null
     }
   })
   return Promise.all(pendingPromises)
@@ -73,65 +76,10 @@ export const getFilmDetails = async(category) => {
     return {
       description: film.opening_crawl,
       title: film.title,
-      date: release_date.film
+      date: release_date.film,
+      favoriteStatus: null
     }
   })
   return Promise.all(pendingPromises);
 }
 
-
-
-// export const cleanData = (data) => {
-//   let cleanData = dataValues.map(value => {
-//     return fetch(`https://swapi.co/api/${value}`)
-//       .then(response => response.json())
-//   })
-//   console.log(Promise.all(data))
-// }
-
-// getData();
-
-// const cleaner = (data) => {
-//   const cleanData = {
-//     name: data.name, 
-//     description: data.populationOfHomeworld,
-//     type: data.species 
-//     // number: data.populationOfHomeworld
-//   }
-//   console.log(cleanData)
-// }
-
-// export default cleaner
-
-// export const planetsCleaner = (data) => {
-//   return {
-//     name: data.name, 
-//     description: data.homeworld || data.terrain,
-//     type: data.species
-//     // number: data.populationOfHomeworld
-//   }
-// }
-
-// export const vehiclesCleaner = (data) => {
-//   return {
-//     name: data.name, 
-//     description: data.terrain,
-//     type: data.
-//     // number: data.populationOfHomeworld
-//   }
-// }
-
-// export const fetchApi = async(category) => {
-//     const data = await fetchJson(`https://swapi.co/api/${category}`)
-//     return data.results
-    // if (category === 'people') {
-    //   return getPeopleDetails(data.results);
-    // } else if (category === 'planets') {
-    //   return getPlanetDetails(data.results);
-    // } else if (category === 'vehicles') {
-    //   return getVehicleDetails(data.results)
-    // } else if(category === 'films') {
-    //   return getFilmDetails(data.results)
-    // }
-
-  // }

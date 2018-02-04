@@ -67,8 +67,9 @@ class App extends Component {
     this.setState({ [category]: data });
   } 
 
-  favoriteCard = (card, dataObj) => {
+  favoriteCard = (dataObj) => {
     const favorites = [...this.state.favorites, dataObj];
+    dataObj.favoriteStatus = !dataObj.favoriteStatus;
 
     this.setState({favorites}, () => {
       localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
