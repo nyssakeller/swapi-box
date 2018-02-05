@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import './ScrollingText.css';
 import PropTypes from 'prop-types';
@@ -7,10 +8,8 @@ const ScrollingText = ({filmData}) => {
 
   return (
     <section className='scrolling-text'>
-      <div className='crawl'>
-        <h1>{filmData[index].title}</h1>
-        <p>{filmData[index].description}</p>
-      </div>
+      <h1>{filmData[index].title}</h1>
+      <p>{filmData[index].description}</p>
     </section>
   );
 };

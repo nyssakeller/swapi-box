@@ -6,12 +6,12 @@
 
 header {
   background-image: url('../images/logo.png');
-  background-size: 250px;
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: 250px;
+  color: white;
   height: 100px;
   padding: 20px;
-  color: white;
 }
 
 .App-title {
