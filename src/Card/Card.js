@@ -3,7 +3,9 @@ import './Card.css';
 import PropTypes from 'prop-types';
 
 
-const Card = ({name, description, type, number, favoriteStatus, favoriteCard, residents, dataObj}) => {
+const Card = ({name, description, type, number, favoriteStatus, 
+  favoriteCard, residents, dataObj}) => {
+
   const toggleClass = favoriteStatus ? 'card favorite' : 'card';
 
   return (
@@ -31,5 +33,6 @@ Card.propTypes = {
   number: PropTypes.string,
   residents: PropTypes.string,
   dataObj: PropTypes.object,
-  favoriteCard: PropTypes.func
+  favoriteCard: PropTypes.func,
+  favoriteStatus: PropTypes.boolean
 };
