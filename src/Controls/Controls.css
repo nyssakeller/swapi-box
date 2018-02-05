@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 
 button {
-  border-radius: 10px;
   background-color: #FFA1A1;
   border-color: #FFA1A1;
+  border-radius: 10px;
   box-shadow: 0px 0px 50px #FD0101;
   color: white;
   font-family: Orbitron;
   font-size: 15px;
   height: 40px;
-  margin: 30px 20px;
+  margin: 20px 20px 30px;
   width: 120px;
 }
 

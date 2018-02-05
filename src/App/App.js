@@ -19,16 +19,13 @@ class App extends Component {
       planets: [],
       vehicles: [],
       filmData: [],
-      favorites: [],
-      active: ''
+      favorites: []
     };
   }
 
   async componentDidMount () {
-    // const filmData = await getFilmDetails(`https://swapi.co/api/films`);
-    // this.setState({filmData}, () => {
-    //   console.log(this.state.filmData);
-    // });
+    const filmData = await getFilmDetails(`https://swapi.co/api/films`);
+    this.setState({filmData});
   }
 
   getButtonClass = (category) => {
@@ -69,12 +66,12 @@ class App extends Component {
 
   setLocalStorage = (category, data) => {
     data = JSON.stringify(data);
-    return localStorage.setItem(category, data)
+    return localStorage.setItem(category, data);
   }
 
   favoriteCard = async(dataObj) => {
-    const favsArray = this.state.favorites
-    const {category} = this.state
+    const {category} = this.state;
+    const favsArray = this.state.favorites;
     const match = this.state[category].find(card => card === dataObj);
     
     match.favoriteStatus = !match.favoriteStatus;
@@ -111,7 +108,7 @@ class App extends Component {
 
         {
           category === 'favorites' && !this.state.favorites.length && 
-          <h1>you don't have any favorites</h1>
+          <h1>you do not have any favorites</h1>
         }
 
       </div>
