@@ -24,8 +24,17 @@ describe('fetchJson', () => {
     expect(window.fetch).toBeCalled();
   });
 
-  it('throw an error when catch is hit', () => {
+  it('should throw the error for getPeople when catch is hit in the Promise', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject({
+      status: 404
+    }))
+    const expectedError = Error('error')
 
+    try {
+      await fetchJson();
+    } catch(err) {
+      expect(err).toEqual(expectedError)
+    }
   });
 
 });
@@ -51,7 +60,20 @@ describe('getFilmDetails', () => {
   it('should return an object of results', async() => {
     const filmData = await getFilmDetails(7);
     expect(typeof filmData).toEqual('object');
-  })
+  });
+
+  it('should throw the error for getPeople when catch is hit in the Promise', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject({
+      status: 404
+    }))
+    const expectedError = Error('error')
+
+    try {
+      await getFilmDetails();
+    } catch(err) {
+      expect(err).toEqual(expectedError)
+    }
+  });
 
 });
 
@@ -80,6 +102,19 @@ describe('getVehicleDetails', () => {
     expect(typeof vehicleData).toEqual('object');
   });
 
+  it('should throw the error for getPeople when catch is hit in the Promise', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject({
+      status: 404
+    }))
+    const expectedError = Error('error')
+
+    try {
+      await getVehicleDetails();
+    } catch(err) {
+      expect(err).toEqual(expectedError)
+    }
+  });
+
 });
 
 describe('getPlanetDetails', () => {
@@ -104,6 +139,19 @@ describe('getPlanetDetails', () => {
     const planetData = await getPlanetDetails();
 
     expect(typeof planetData).toEqual('object');
+  });
+
+  it('should throw the error for getPeople when catch is hit in the Promise', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject({
+      status: 404
+    }))
+    const expectedError = Error('error')
+
+    try {
+      await getPlanetDetails();
+    } catch(err) {
+      expect(err).toEqual(expectedError)
+    }
   });
 
 });
