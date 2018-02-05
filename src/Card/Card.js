@@ -14,7 +14,6 @@ const Card = ({name, description, type, number, favoriteStatus,
         className='favorite-button'
         onClick={() => favoriteCard(dataObj)}>
       </button>
-
       <h2>{name}</h2>
       <p>{description}</p>
       <p>{type}</p>
@@ -30,9 +29,9 @@ Card.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   type: PropTypes.string,
-  number: PropTypes.string,
+  number: PropTypes.number,
   residents: PropTypes.string,
   dataObj: PropTypes.object,
   favoriteCard: PropTypes.func,
-  favoriteStatus: PropTypes.boolean
+  favoriteStatus: PropTypes.func
 };

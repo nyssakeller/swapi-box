@@ -24,13 +24,16 @@ class App extends Component {
   }
 
   async componentDidMount () {
+  try{    
     const filmData = await getFilmDetails(`https://swapi.co/api/films`);
     this.setState({filmData});
+  } catch (error) {
+    console.log('error')
+  }
   }
 
   getButtonClass = (category) => {
     this.setState({category}, () => {
-      const {category} = this.state;
       
       !localStorage[category] ? 
         this.getCorrectApi() : this.getFromLocalStorage();

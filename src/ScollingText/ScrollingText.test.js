@@ -1,13 +1,52 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import ScrollingText from './ScrollingText.js';
+/* eslint-disable */
+import React from 'react';
+import { shallow } from 'enzyme';
+import ScrollingText from './ScrollingText.js';
 
-// let wrapper;
+const mockFilm = [
+  {
+    title: 'a new hope',
+    opening_crawl: 'text',
+    release_date: 'yesterday'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+];
 
-// beforeEach(() => {
-//   wrapper = shallow(<ScrollingText filmData={mockData} />)
-// });
 
-// describe('ScrollingText', () => {
+describe('ScrollingText', () => {
+ 
+  it('snapshot test', () => {
+    const wrapper = shallow(<ScrollingText filmData={mockFilm} />)
+    expect(wrapper).toMatchSnapshot();
+  });
 
-// });
+});

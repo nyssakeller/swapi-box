@@ -17,5 +17,5 @@ const ScrollingText = ({filmData}) => {
 export default ScrollingText;
 
 ScrollingText.propTypes = {
-  filmData: PropTypes.object.isRequired
+  filmData: PropTypes.array
 };

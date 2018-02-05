@@ -3,8 +3,9 @@
 article {
   background-color: rgba(32, 32, 32, 0.7);
   display: inline-block;
-  height: 350px;
+  height: 370px;
   margin: 20px;
+  padding-top: 15px;
   width: 300px;
   vertical-align: top;
 }
