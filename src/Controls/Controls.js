@@ -1,7 +1,6 @@
 import React from 'react';
 import './Controls.css';
 import PropTypes from 'prop-types';
-import '../images/star.png'
 
 const Controls = ({getButtonClass, favorites}) => {
   return (
