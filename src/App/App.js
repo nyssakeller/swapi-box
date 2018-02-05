@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CardContainer from '../CardContainer/CardContainer.js';
 import Controls from '../Controls/Controls.js';
-import ScrollingText from '../ScollingText/ScrollingText.js';s
+import ScrollingText from '../ScollingText/ScrollingText.js';
 import './App.css';
 import {
   getPeopleDetails,
@@ -25,12 +25,10 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    try {
-      const filmData = await getFilmDetails(`https://swapi.co/api/films`);
-      this.setState({filmData});
-    } catch (error) {
-      throw new Error('error')
-    }
+    // const filmData = await getFilmDetails(`https://swapi.co/api/films`);
+    // this.setState({filmData}, () => {
+    //   console.log(this.state.filmData);
+    // });
   }
 
   getButtonClass = (category) => {
@@ -69,16 +67,23 @@ class App extends Component {
     this.setState({ [category]: data });
   } 
 
-  favoriteCard = (dataObj) => {
-    const {category} = this.state;
-    const favoritedCard = this.state[category].find(card => card === dataObj)
-    const favorites = [...this.state.favorites, favoritedCard];
+  setLocalStorage = (category, data) => {
+    data = JSON.stringify(data);
+    return localStorage.setItem(category, data)
+  }
 
-    dataObj.favoriteStatus = !dataObj.favoriteStatus;
+  favoriteCard = async(dataObj) => {
+    const favsArray = this.state.favorites
+    const {category} = this.state
+    const match = this.state[category].find(card => card === dataObj);
+    
+    match.favoriteStatus = !match.favoriteStatus;
+  
+    const favorites = match.favoriteStatus ? 
+      [...favsArray, match] : favsArray.filter(card => card !== dataObj);
 
-    this.setState({favorites}, () => {
-      localStorage.setItem('favorites', JSON.stringify(this.state.favorites));
-    });
+    await this.setState({favorites});
+    await this.setLocalStorage('favorites', this.state.favorites);
   }
 
   render() {
@@ -102,6 +107,11 @@ class App extends Component {
           <CardContainer 
             data={this.state[category]}
             favoriteCard={this.favoriteCard} />
+        }
+
+        {
+          category === 'favorites' && !this.state.favorites.length && 
+          <h1>you don't have any favorites</h1>
         }
 
       </div>

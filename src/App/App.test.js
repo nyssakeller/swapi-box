@@ -5,6 +5,7 @@ import App from './App.js';
 import { shallow, mount } from 'enzyme';
 import {mockFilm, mockVehicle, mockPlanets, mockPeople} from '../mockData.js';
 import getPeopleDetails from '../apiHelper.js';
+import 'jest-localstorage-mock';
 
 
 const locallyStoredData = {
@@ -32,7 +33,7 @@ describe('App', () => {
   let wrapper;
 
   beforeEach(async() => {
-    wrapper = await mount(<App />)
+    wrapper = await mount(<App />, {disableLifecycleMethods: true})
   });
   
   it('initial states', () => {
@@ -44,43 +45,75 @@ describe('App', () => {
     expect(wrapper.state().category).toEqual(null)
   });
 
-  it('category updates after get getButtonClass is called', async() => {
-    window.fetch
-    await wrapper.instance().getButtonClass('people');
-    expect(wrapper.state('category')).toEqual('people');
+  describe('getButtonClass', () => { 
+
+    it('the state of category should update when button is clicked', () => {
+      wrapper.find('.people').simulate('click');
+      expect(wrapper.state('category')).toEqual('people');
+    });
+
+    it('getButtonClass calls getFromLocalStoarage() if there is data in localStorage', async() => {
+      wrapper.instance().getButtonClass('people');
+
+      global.localStorage = {
+        setItem: (category) => {
+          return JSON.stringify(locallyStoredData[category]);
+        },
+        getItem: () => {}
+      };
+     
+  
+      expect(wrapper.instance().getFromLocalStorage()).toHaveBeenCalled();
+    });
+
+    it.only('render cards when a button is clicked', () => {
+      wrapper.find('.people').simulate('click')
+    
+      expect(wrapper.find('Card').length).toBeGreaterThan();
+    });
+
+      // it('getButtonClass calls get getCorrectApi() if localStorage is empty', async() => {
+    //   global.localStorage = {
+    //     setItem: () => {},
+    //     getItem: (category) => {
+    //       return JSON.stringify(locallyStoredData[category]);
+    //   await wrapper.instance().getButtonClass('people');
+    //   expect(wrapper.instance().getCorrectApi()).toHaveBeenCalled();
+    // });
   });
 
-  it('getButtonClass calls getFromLocalStoarage() if there is data in localStorage', () => {
-    global.localStorage = {
-      setItem: () => {},
-      getItem: (category) => {
-        return JSON.stringify(locallyStoredData[category]);
+  describe('getCorrectApi', () => { 
 
-        wrapper.instance().getButtonClass('people');
-        expect(wrapper.instance().getFromLocalStoarage()).toHaveBeenCalled();
-      }
-    }
+    it('getCorrectApi should call the correct fetch function', async() => {
+      const category = 'people';
+      const data = mockPeople
+      await wrapper.instance().getCorrectApi('people');
+      expect(wrapper.state('people')).toEqual(data);
+    });
+
   });
 
-  // it('getButtonClass calls get getCorrectApi() if localStorage is empty', async() => {
-  //   await wrapper.instance().getButtonClass('people');
-  //   expect(wrapper.instance().getCorrectApi()).toHaveBeenCalled();
-  // });
+  describe('getFromLocalStorage', () => {
 
-  // it('getCorrectApi should call the correct fetch function', async() => {
-  //   const category = 'people';
-  //   const data = mockPeople
-  //   await wrapper.instance().getCorrectApi('people');
-  //   expect(wrapper.state('people')).toEqual(data);
-  // })
+    it('', () => {
+      const category = 'peope';
+      wrapper.instance().getFromLocalStorage();
+      localStorage.getItem('people')
+      expect(wrapper.state('people')).toEqual(mockPeople);
+    });
 
-  it('', () => {
-    const category = 'peope';
-    wrapper.instance().getFromLocalStorage();
-    localStorage.getItem('people')
-    expect(wrapper.state('people')).toEqual(mockPeople);
   });
 
+  describe('favoriteCard function', () => {
+    // it('favoriteCard sets the state of favorites', () => {
+    //   const dataObj = {name: 'Luke', type: 'human', description:'earth', number: '2', favoriteStatus: true};
+    //   wrapper.instance().favoriteCard(dataObj);
+    //   global.localStorage = {
+    //     setItem: (favorites) => dataObj
+    //   }
+    //   expect(wrapper.state('favorites')).toEqual([dataObj])
+    // });
+  });
 });
 
 

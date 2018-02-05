@@ -2,6 +2,7 @@ import React from 'react';
 import './Card.css';
 import PropTypes from 'prop-types';
 
+
 const Card = ({name, description, type, number, favoriteStatus, favoriteCard, residents, dataObj}) => {
   const toggleClass = favoriteStatus ? 'card favorite' : 'card';
 
