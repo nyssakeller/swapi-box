@@ -8,7 +8,32 @@ export const mockFilm = [
     title: 'another title',
     opening_crawl: 'more text',
     release_date: 'tomorrow'
-  }
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
+  {
+    title: 'another title',
+    opening_crawl: 'more text',
+    release_date: 'tomorrow'
+  },
 ];
 
 export const mockVehicle = [

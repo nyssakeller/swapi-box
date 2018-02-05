@@ -35,6 +35,6 @@ const Controls = ({getButtonClass, favorites}) => {
 export default Controls;
 
 Controls.propTypes = {
-  getButtonClass: PropTypes.func.isRequired,
+  getButtonClass: PropTypes.func,
   favorites: PropTypes.array.isRequired
 };

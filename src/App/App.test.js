@@ -4,9 +4,6 @@ import ReactDOM from 'react-dom';
 import App from './App.js';
 import { shallow, mount } from 'enzyme';
 import {mockFilm, mockVehicle, mockPlanets, mockPeople} from '../mockData.js';
-import getPeopleDetails from '../apiHelper.js';
-import 'jest-localstorage-mock';
-
 
 const locallyStoredData = {
   people: mockPeople,
@@ -22,18 +19,19 @@ global.localStorage = {
   }
 };
 
-window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-  status: 200,
-  json: () => Promise.resolve({
-    results: mockPeople,
-  })
-}));
+window.fetch = jest.fn()
 
 describe('App', () => {
   let wrapper;
 
   beforeEach(async() => {
-    wrapper = await mount(<App />, {disableLifecycleMethods: true})
+    wrapper = await shallow(<App />, {disableLifecycleMethods: true});
+  
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+          status: 200,
+          json: () => Promise.resolve({  })
+        })
+      )
   });
   
   it('initial states', () => {
@@ -52,68 +50,80 @@ describe('App', () => {
       expect(wrapper.state('category')).toEqual('people');
     });
 
-    it('getButtonClass calls getFromLocalStoarage() if there is data in localStorage', async() => {
-      wrapper.instance().getButtonClass('people');
-
+    it('getButtonClass calls getFromLocalStoarage() if there is data in localStorage', async() => { 
       global.localStorage = {
-        setItem: (category) => {
-          return JSON.stringify(locallyStoredData[category]);
-        },
-        getItem: () => {}
+        setItem: () => {},
+        getItem: (category) => {
+          return JSON.stringify(mockPeople)
+        }
       };
-     
-  
-      expect(wrapper.instance().getFromLocalStorage()).toHaveBeenCalled();
+      global.localStorage.setItem('people', JSON.stringify(mockPeople))
+      wrapper.setState({category: 'people'})
+      wrapper.instance().getFromLocalStorage()
+
+      wrapper.update()
+      expect(wrapper.state('people')).toEqual(mockPeople);
     });
 
-    it.only('render cards when a button is clicked', () => {
-      wrapper.find('.people').simulate('click')
-    
-      expect(wrapper.find('Card').length).toBeGreaterThan();
+    it('getButtonClass calls get getCorrectApi() if localStorage is empty', async() => {
+    global.localStorage = {
+      setItem: () => {},
+      getItem: (category) => {
+        return JSON.stringify(locallyStoredData[category])
+      } 
+    };
+      // wrapper.instance().getButtonClass('people');
+      // expect(wrapper.instance().getCorrectApi()).toHaveBeenCalled();
     });
-
-      // it('getButtonClass calls get getCorrectApi() if localStorage is empty', async() => {
-    //   global.localStorage = {
-    //     setItem: () => {},
-    //     getItem: (category) => {
-    //       return JSON.stringify(locallyStoredData[category]);
-    //   await wrapper.instance().getButtonClass('people');
-    //   expect(wrapper.instance().getCorrectApi()).toHaveBeenCalled();
-    // });
   });
 
   describe('getCorrectApi', () => { 
 
     it('getCorrectApi should call the correct fetch function', async() => {
-      const category = 'people';
-      const data = mockPeople
+      wrapper.setState({category: 'people'});
       await wrapper.instance().getCorrectApi('people');
-      expect(wrapper.state('people')).toEqual(data);
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        status: 200,
+        json: () => Promise.resolve({ 
+          results: mockPeople
+        })
+      }))
+
+      expect(wrapper.state('people')).toEqual(mockPeople);
     });
 
   });
 
   describe('getFromLocalStorage', () => {
 
-    it('', () => {
-      const category = 'peope';
+    it('set state based off of localStorage', () => {
       wrapper.instance().getFromLocalStorage();
-      localStorage.getItem('people')
+      global.localStorage = {
+        setItem: () => {},
+        getItem: (people) => {
+          return JSON.parse(mockPeople)
+        }
+      };
+
+      global.localStorage.getItem(people)
       expect(wrapper.state('people')).toEqual(mockPeople);
     });
 
   });
 
   describe('favoriteCard function', () => {
-    // it('favoriteCard sets the state of favorites', () => {
-    //   const dataObj = {name: 'Luke', type: 'human', description:'earth', number: '2', favoriteStatus: true};
-    //   wrapper.instance().favoriteCard(dataObj);
-    //   global.localStorage = {
-    //     setItem: (favorites) => dataObj
-    //   }
-    //   expect(wrapper.state('favorites')).toEqual([dataObj])
-    // });
+    it('should add card to favorites in state when card is clicked', () => {
+      expect(wrapper.state().favorites.length).toEqual(0);
+
+      wrapper.find('.people').simulate('click', 
+        {target: {closest: () => { return {innerText: 'people'}; }}});
+      wrapper.find('.favorite-button').first().simulate('click');
+
+      expect(wrapper.state().favorites.length).toEqual(1);
+    });
+
   });
+  
 });
 
 

@@ -88,7 +88,6 @@ export const getFilmDetails = async(category) => {
   try {
     const {results} = await fetchJson(category)
     const pendingPromises = results.map(async (film) => {
-      console.log(film)
       const { opening_crawl, title, release_date } = film;
      
       return {
