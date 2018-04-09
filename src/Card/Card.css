@@ -5,26 +5,33 @@ article {
   display: inline-block;
   height: 370px;
   margin: 20px;
-  padding-top: 15px;
+  padding: 15px;
+  padding-top: 20px;
   width: 300px;
   vertical-align: top;
 }
 
 .card p {
-  color: white;
+  color: #d0cccc;  
   font-size: 18px;
+  text-align: left;
 }
 
 .card h2 {
   color: #fbde33;
   font-family: Orbitron;
   font-size: 30px;
+  margin-top: -55px;
+  text-align: left;
+  width: 240px;
 }
 
 .favorite-button {
   bottom: 25px;
   height: 35px;
   left: 125px;
+  margin-top: 20px;
+  margin-right: 3px;
   margin-bottom: 0;
   position: relative;
   width: 35px;

@@ -16,7 +16,7 @@ export const getPeopleDetails = async(category) => {
       const { name, homeworld, species, population } = person;
       const speciesData = await fetchJson(species);
       const homeworldData = await fetchJson(homeworld);
-      
+      ``
       return {
         name: person.name,
         description: 'Homeworld: ' + homeworldData.name,

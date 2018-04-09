@@ -76,7 +76,6 @@ class App extends Component {
     const {category} = this.state;
     const favsArray = this.state.favorites;
     const match = this.state[category].find(card => card === dataObj);
-    
     match.favoriteStatus = !match.favoriteStatus;
   
     const favorites = match.favoriteStatus ? 
